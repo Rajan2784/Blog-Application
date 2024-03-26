@@ -18,11 +18,12 @@ export class AuthService {
         ID.unique(),
         email,
         password,
-        name,
+        name
       );
       if (userAccount) {
         // calling another method
         this.login({ email, password });
+        return userAccount;
       } else {
         return userAccount;
       }
@@ -43,9 +44,9 @@ export class AuthService {
     try {
       return await this.account.get();
     } catch (error) {
+      console.log(error);
       throw error;
     }
-    return null;
   }
 
   async logout() {

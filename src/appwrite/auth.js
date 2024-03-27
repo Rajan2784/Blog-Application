@@ -21,16 +21,20 @@ export class AuthService {
         name
       );
       if (userAccount) {
-        // calling another method
-        this.login({ email, password });
-        return userAccount;
-      } else {
-        return userAccount;
+        // Calling the login method
+        await this.login({ email, password }); // Wait for login to complete
+        
+        // Fetch user data after login
+        const currentUserData = await this.getCurrentUser();
+        
+        // Return the user data
+        return currentUserData;
       }
     } catch (error) {
       throw error;
     }
   }
+  
 
   async login({ email, password }) {
     try {

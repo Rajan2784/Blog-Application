@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import service from "../appwrite/configs";
 import { Container, PostCard } from "../components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
+import { setPostInStore } from "../store/postSlice";
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData);
+  const postsInStore = useSelector((state) => state.post.posts);
+  const loading = useSelector((state) => state.post.loading);
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     service.getPosts().then((posts) => {
       if (posts) {
-        setPosts(posts.documents);
-        setLoading(false);
+        dispatch(setPostInStore(posts.documents));
+        // setLoading(false);
       }
     });
   }, []);
@@ -44,7 +47,7 @@ const Home = () => {
       ) : (
         <Container>
           <div className="flex flex-wrap justify-center items-center sm:justify-start sm:items-start w-full gap-1">
-            {posts.map((post) => (
+            {postsInStore.map((post) => (
               <div key={post.$id} className="p-2">
                 <PostCard {...post} />
               </div>

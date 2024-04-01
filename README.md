@@ -312,4 +312,75 @@ const service = new Service();
 export default service;
 ```
 
+### Redux Store:
+
+```javascript
+import { configureStore } from "@reduxjs/toolkit";
+import authSlice from "./authSlice";
+import postSlice from "./postSlice";
+
+const store = configureStore({
+  reducer: { auth: authSlice, post: postSlice },
+});
+
+export default store;
+```
+
+### Redux Store for authentication:
+
+```javascript
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  status: false,
+  userData: null,
+};
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    login: (state, action) => {
+      state.status = true;
+      state.userData = action.payload;
+    },
+    logout: (state) => {
+      state.status = false;
+      state.userData = null;
+    },
+  },
+});
+
+export const { login, logout } = authSlice.actions;
+export default authSlice.reducer;
+```
+
+### Redux store for posts:
+
+```javascript
+import { createSlice } from "@reduxjs/toolkit";
+
+const postSlice = createSlice({
+  name: "post",
+  initialState: {
+    posts: [],
+    userPosts: [],
+    loading: true,
+  },
+  reducers: {
+    setPostInStore: (state, action) => {
+      state.posts = action.payload;
+      state.loading = false;
+    },
+    setUserPosts: (state, action) => {
+      state.userPosts = action.payload;
+      state.loading = false;
+    },
+  },
+});
+export const { setPostInStore, setUserPosts } = postSlice.actions;
+
+export default postSlice.reducer;
+```
+
 ## Thank You!!

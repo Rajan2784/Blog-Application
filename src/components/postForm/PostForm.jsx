@@ -22,11 +22,15 @@ function PostForm({ post }) {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const submit = async (data) => {
+    setError("");
     setLoading(true);
     if (post) {
       try {
-        const file = data.image[0] ? await service.uploadFile(data.image[0]) : null;
+        const file = data.image[0]
+          ? await service.uploadFile(data.image[0])
+          : null;
         if (file) {
           await service.deleteFile(post.featuredImage);
         }
@@ -40,7 +44,7 @@ function PostForm({ post }) {
         }
       } catch (error) {
         setLoading(false);
-        console.error('Error updating post:', error);
+        setError(error.message);
       }
     } else {
       const file = await service.uploadFile(data.image[0]);
@@ -57,7 +61,8 @@ function PostForm({ post }) {
             setLoading(false);
           }
         } catch (error) {
-          console.error("Error creating post:", error);
+          setLoading(false);
+          setError(error.message);
         }
       }
     }
@@ -102,6 +107,7 @@ function PostForm({ post }) {
           onSubmit={handleSubmit(submit)}
           className="flex flex-col sm:flex-row justify-center sm:justify-normal sm:items-start items-center w-full flex-wrap"
         >
+          {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
           <div className="sm:w-2/3 w-full px-2">
             <Input
               label="Title :"
@@ -133,7 +139,7 @@ function PostForm({ post }) {
               control={control}
               defaultValue={post?.content || ""}
               {...register("content", {
-                required:true,
+                required: true,
               })}
             />
           </div>

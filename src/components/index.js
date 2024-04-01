@@ -9,7 +9,6 @@ import PostForm from "../components/postForm/PostForm";
 import AuthLayout from "../components/AuthLayout";
 import Login from "./Login";
 import Signup from "./Signup";
-import AllPosts from "../pages/AllPosts";
 import AddPost from "../pages/AddPost";
 import EditPost from "../pages/EditPost";
 import Post from "../pages/Post";
@@ -25,7 +24,6 @@ export {
   AuthLayout,
   Login,
   Signup,
-  AllPosts,
   AddPost,
   EditPost,
   Post,

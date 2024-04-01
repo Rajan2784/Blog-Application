@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Container, PostCard } from "../components";
 import service from "../appwrite/configs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
+import { setUserPosts } from "../store/postSlice";
 
 const MyPost = () => {
   const userData = useSelector((state) => state.auth.userData);
-  const [posts, setPosts] = useState([]);
+  const userPosts = useSelector((state) => state.post.userPosts);
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   service.getCurrentUserPosts(userData.userData.$id).then((post) => {
     if (post) {
-      setPosts(post.documents);
+      dispatch(setUserPosts(post.documents))
       setLoading(false);
     }
   });
@@ -25,10 +27,10 @@ const MyPost = () => {
       ) : (
         <Container>
           <div className="flex flex-wrap justify-center items-center sm:justify-start sm:items-start w-full gap-1">
-            {posts.length === 0 ? (
+            {userPosts.length === 0 ? (
               <h1 className="text-2xl font-bold dark:text-white animate-bounce">No Blogs created!!</h1>
             ) : (
-              posts.map((post) => (
+              userPosts.map((post) => (
                 <div key={post.$id} className="p-2">
                   <PostCard {...post} />
                 </div>

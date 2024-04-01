@@ -8,7 +8,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import {
   AddPost,
-  AllPosts,
   AuthLayout,
   EditPost,
   Login,
@@ -39,14 +38,6 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout authentication={false}>
             <Signup />
-          </AuthLayout>
-        ),
-      },
-      {
-        path: "/all-posts",
-        element: (
-          <AuthLayout authentication>
-            <AllPosts />
           </AuthLayout>
         ),
       },

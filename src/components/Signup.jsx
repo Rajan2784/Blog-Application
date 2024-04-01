@@ -19,17 +19,11 @@ const Signup = () => {
     setLoading(true);
     setError("");
     try {
-      console.log("create is called for creating user account");
       const userData = await authService.createAccount(data);
-      console.log("user is created", userData);
       if (userData) {
-        console.log("The userdata block is callled");
-        const currentUserData = await authService.getCurrentUser(); // rename here
-        console.log("current user blocked is called");
+        const currentUserData = await authService.getCurrentUser();
         if (currentUserData) {
-          console.log("dispatch is being called");
           dispatch(login(currentUserData));
-          console.log("dispath is over");
           setLoading(false);
           navigate("/");
         }
@@ -39,7 +33,6 @@ const Signup = () => {
       setLoading(false);
     }
   };
-  console.log(loading);
 
   return (
     <div className="flex items-center justify-center w-full">

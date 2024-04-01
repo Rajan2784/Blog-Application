@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container, LogoutBtn } from "../index";
 import { IoMenu } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
+import { IoIosSearch } from "react-icons/io";
 
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.status);
@@ -27,11 +28,6 @@ const Header = () => {
       active: !authStatus,
     },
     {
-      name: "All Posts",
-      path: "/all-posts",
-      active: authStatus,
-    },
-    {
       name: "Add Post",
       path: "/add-post",
       active: authStatus,
@@ -41,11 +37,6 @@ const Header = () => {
       path: "/my-post",
       active: authStatus,
     },
-    // {
-    //   name: "My Profile",
-    //   path: "/my-profile",
-    //   active: authStatus,
-    // },
   ];
 
   const location = useLocation();
@@ -68,15 +59,46 @@ const Header = () => {
     }
   };
 
+  const [searchContent, setSearchContent] = useState("");
+
+  // Function to handle the search event
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      setSearchContent(e.target.value);
+    }
+  };
+
+  const handleSearchButtonClick = () => {
+    setSearchContent(document.getElementById("search").value);
+  };
+  console.log(searchContent);
+
   return (
     <header className="py-3 shadow dark:bg-zinc-800 dark:text-white">
       <Container>
-        <nav className="flex items-center justify-between ">
+        <nav className="flex items-center justify-between">
           <div>
             <Link to="/">
               <h1 className="text-2xl font-bold font-[Times-Roman]">R.</h1>
             </Link>
           </div>
+
+          <div className="flex items-center flex-1 justify-center">
+            <input
+              type="text"
+              id="search"
+              placeholder="Search"
+              onKeyDown={(e) => handleSearch(e)}
+              className="px-2 py-1 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            <button
+              onClick={handleSearchButtonClick}
+              className="ml-2 px-3 py-1 bg-blue-400 text-white rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <IoIosSearch />
+            </button>
+          </div>
+
           <ul
             className={`flex flex-col justify-center items-center gap-4 fixed sm:relative sm:right-0 sm:top-0 md:flex-row ${
               visible ? "right-2" : "-right-36"
@@ -100,7 +122,11 @@ const Header = () => {
               <Link to={"my-profile"}>
                 <img
                   src="/boy.jpg"
-                  className={`w-10 h-10 rounded-full ${location.pathname === "/my-profile" ? "bg-blue-400 p-1 object-cover" : ""}`}
+                  className={`w-10 h-10 rounded-full ${
+                    location.pathname === "/my-profile"
+                      ? "bg-blue-400 p-1 object-cover"
+                      : ""
+                  }`}
                   width={48}
                   height={48}
                   alt=""

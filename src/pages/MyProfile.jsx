@@ -20,8 +20,6 @@ const MyProfile = () => {
       {loading ? (
         <div className="w-[90vw] h-[90vh] mt-4 flex flex-col gap-4 sm:flex-row justify-center sm:justify-start items-center sm:items-start">
           <Loader />
-          <Loader />
-          <Loader />
         </div>
       ) : (
         <Container>

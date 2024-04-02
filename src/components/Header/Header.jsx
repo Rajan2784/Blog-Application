@@ -70,7 +70,7 @@ const Header = () => {
           </div>
 
           <ul
-            className={`flex flex-col justify-center items-center gap-4 fixed sm:relative sm:right-0 sm:top-0 md:flex-row ${
+            className={`flex flex-col justify-center items-center gap-4 fixed sm:gap-3 sm:flex-row sm:relative sm:right-0 sm:top-0 md:flex-row ${
               visible ? "right-2" : "-right-36"
             } transition-[right] duration-500 top-14 z-30 dark:bg-zinc-800 dark:text-white p-4 bg-white text-black rounded-lg sm:flex ml-auto sm:visible md:visible lg:visible`}
           >

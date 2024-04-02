@@ -11,7 +11,7 @@ const Post = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
 
-  const {userData} = useSelector((state) => state.auth.userData);
+  const { userData } = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
     setLoading(true);
@@ -34,8 +34,7 @@ const Post = () => {
     });
   };
 
-  const isAuthor =
-    post && userData ? post.userId === userData.$id : false;
+  const isAuthor = post && userData ? post.userId === userData.$id : false;
 
   return (
     <div className="py-8 relative">

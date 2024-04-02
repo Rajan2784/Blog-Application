@@ -59,20 +59,6 @@ const Header = () => {
     }
   };
 
-  const [searchContent, setSearchContent] = useState("");
-
-  // Function to handle the search event
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      setSearchContent(e.target.value);
-    }
-  };
-
-  const handleSearchButtonClick = () => {
-    setSearchContent(document.getElementById("search").value);
-  };
-  console.log(searchContent);
-
   return (
     <header className="py-3 shadow dark:bg-zinc-800 dark:text-white">
       <Container>
@@ -81,22 +67,6 @@ const Header = () => {
             <Link to="/">
               <h1 className="text-2xl font-bold font-[Times-Roman]">R.</h1>
             </Link>
-          </div>
-
-          <div className="flex items-center flex-1 justify-center">
-            <input
-              type="text"
-              id="search"
-              placeholder="Search"
-              onKeyDown={(e) => handleSearch(e)}
-              className="px-2 py-1 border border-gray-300 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <button
-              onClick={handleSearchButtonClick}
-              className="ml-2 px-3 py-1 bg-blue-400 text-white rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              <IoIosSearch />
-            </button>
           </div>
 
           <ul

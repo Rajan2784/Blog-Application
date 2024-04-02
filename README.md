@@ -12,11 +12,11 @@ Dark mode and Light mode theme.
 
 ## Light Mode:
 
-![](./public/web-light.png)
+![https://blog-application-nine-ivory.vercel.app/](./public/web-light.png)
 
 ## Dark Mode:
 
-![](./public/web-dark.png)
+![https://blog-application-nine-ivory.vercel.app/](./public/web-dark.png)
 
 ## To clone this project, follow these steps:
 
